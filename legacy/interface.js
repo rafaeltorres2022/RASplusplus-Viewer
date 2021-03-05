@@ -30,7 +30,8 @@ app.component('asset-template', {
     template: `
     <div class="card" style="width: 18rem;">
         <div class="card-body">
-            <h5 class="card-title">{{asset.name}}</h5>
+            <h5 class="card-title">{{asset.index}} -- {{asset.name}}</h5>
+            <p>Id: {{asset.id}}</p>
             <ol v-for="(value, key) in asset.classification">
                 <p>{{key}} : 
                     <ol v-for="v in value">

@@ -1,4 +1,4 @@
-var fileNames = ["mdgd2018.raspp","mdwe2018.raspp","remoddrepo-classification.raspp"];
+var fileNames = ["remoddrepo-classification.raspp", "mdgd2018.raspp", "mdwe2018.raspp"];
 var repositorio = [];
 
 //for(var i = 0;i<fileNames.length;i++){
@@ -19,18 +19,19 @@ function readFileToXml(filePath) {
     var returnValue = request.responseText;
 
     var parser = new DOMParser();
-    xmlDoc = parser.parseFromString(returnValue, "text/xml");
+    let xmlDoc = parser.parseFromString(returnValue, "text/xml");
     return xmlDoc;
 }
 
-function createAssets(fileInXml){
+function createAssets(xmlDoc){
     //var assets = [];
     var assetsInXmlToParse = xmlDoc.getElementsByTagName("assets");
-    
-    for(asset of assetsInXmlToParse){
+    var index = 0;
+    for(let asset of assetsInXmlToParse){
         var assetObj = {}
         assetObj.name = asset.getAttribute("name");
         assetObj.id = asset.getAttribute("id");
+        assetObj.index = index++;
         classificationNode = asset.getElementsByTagName("classification");
         classification = {}
         for(descriptorGroup of classificationNode[0].getElementsByTagName("descriptorGroup")){
@@ -55,6 +56,8 @@ function createAssets(fileInXml){
     
     //return assets;
 }
+
+export {repositorio}
 
 
 
